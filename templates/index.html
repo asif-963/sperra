@@ -30,6 +30,7 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet"> -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
 
 
 
@@ -69,12 +70,12 @@
 
                 <!-- Mobile Appointment Button -->
                 <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
-                    Appointment
+                    Book Now
                 </a>
 
                 <!-- Toggle Button -->
                 <button class="navbar-toggler navbar-toggle" type="button">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon" ></span>
                 </button>
 
                 <!-- Desktop Menu -->
@@ -104,7 +105,7 @@
 
             </div>
         </nav>
-        <div class="responsive-menu"></div>
+        <div class="responsive-menu"></div> 
     </div>
 </header>
 <style>
@@ -124,7 +125,7 @@
 /* Mobile Appointment Button */
 .mobile-appointment-btn {
     display: none;
-    padding: 8px 14px;
+    padding: 15px 14px;
     font-size: 13px;
     white-space: nowrap;
 }
@@ -149,7 +150,13 @@
 
     .navbar-toggler {
         padding: 4px 8px;
+        border-color: #fff;
     }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 
     .navbar-collapse {
         background: #fff;
@@ -182,7 +189,7 @@
                                         <div class="section-title">
                                             <h3 class="wow fadeInUp">Welcome to Sperra</h3>
                                             <h1 class="text-anime-style-3"  data-cursor="-opaque">
-                                                Confidential Medical Care for Sexual Health & Wellness
+                                                Expert Sexual Wellness Care You Can Trust
                                             </h1>
                                             <p class="wow fadeInUp" data-wow-delay="0.2s">
                                                 Led by an MD-qualified Ayurvedic doctor with 10+ years of experience and global exposure
@@ -236,9 +243,9 @@
                                     <div class="hero-content">
                                         <!-- Section Title Start -->
                                         <div class="section-title">
-                                            <h3 class="wow fadeInUp">Welcome to Sperra Advanced Ayurveda</h3>
+                                            <h3 class="wow fadeInUp">Welcome to Sperra </h3>
                                             <h1 class="text-anime-style-3" data-cursor="-opaque">
-                                                Sexual wellness, and infertility guided by experienced doctors
+                                                Your Privacy Is Our Highest Priority
                                             </h1>
                                             <p class="wow fadeInUp" data-wow-delay="0.2s">
                                                 Every consultation is handled with compelete discretion and professionalcare.
@@ -385,16 +392,46 @@
                         <!-- About Experience Box Start -->
                         <div class="about-experience-box">
                             <!-- About Experience List Start -->
-                            <div class="about-experience-list wow fadeInUp" data-wow-delay="0.4s">
-                                <ul>
-                                    <li>100% Confidential & Ethical Medical Care</li>
-                                    <li>Doctor-Led Diagnosis and Treatment</li>
-                                    <li>Root-Cause Focused Ayurvedic Healing</li>
-                                    <li>Integrated Physical & Psychological Care</li>
-                                    <li>Safe, Natural & Long-Term Health Solutions</li>
-                                </ul>
-                            </div>
+                           <div class="about-experience-list wow fadeInUp" data-wow-delay="0.4s">
+    <ul class="fa-list">
+        <li><i class="fa-solid fa-seedling"></i> 100% Confidential & Ethical Medical Care</li>
+        <li><i class="fa-solid fa-seedling"></i> Doctor-Led Diagnosis and Treatment</li>
+        <li><i class="fa-solid fa-seedling"></i> Root-Cause Focused Ayurvedic Healing</li>
+        <li><i class="fa-solid fa-seedling"></i> Integrated Physical & Psychological Care</li>
+        <li><i class="fa-solid fa-seedling"></i> Safe, Natural & Long-Term Health Solutions</li>
+    </ul>
+</div>
+<style>
+    .fa-list {
+    list-style: none !important;
+    padding-left: 0;
+    margin: 0;
+}
 
+/* 🚫 Remove theme-generated bullets/ticks */
+.fa-list li::before {
+    content: none !important;
+    display: none !important;
+}
+
+.fa-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* ✅ Font Awesome icon only */
+.fa-list li i {
+    color: #662D91; /* violet */
+    font-size: 18px;
+    margin-top: 4px;
+    min-width: 18px;
+}
+
+</style>
                             <!-- About Experience List End -->
 
                             <!-- About Experience Image Start -->
@@ -467,7 +504,7 @@
                             <div class="service-content-title">
                                 <h2>
                                     <a href="{% url 'treatment_details' treatment.slug %}">
-                                        {{ treatment.title|safe }}
+                                        {{ treatment.title|truncatewords:5  }}
                                     </a>
                                 </h2>
                                 <a href="{% url 'treatment_details' treatment.slug %}" class="readmore-btn">
@@ -722,7 +759,7 @@ var swiper = new Swiper(".treatments-swiper", {
                     <div class="why-choose-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">Why should I trust YOU?</h3>
+                            <h3 class="wow fadeInUp">What makes us a trusted choice for your care?</h3>
                             <h2 class="text-anime-style-3" data-cursor="-opaque">
                                 Confidential, Doctor-Led Ayurvedic Care You Can Trust
                             </h2>
@@ -1171,7 +1208,7 @@ var swiper = new Swiper(".treatments-swiper", {
                     <div class="our-appointment-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">appointment</h3>
+                            <!-- <h3 class="wow fadeInUp">appointment</h3> -->
                             <h2 class="text-anime-style-3" data-cursor="-opaque">Make an appointment</h2>
                         </div>
                         <!-- Section Title End -->
@@ -1199,8 +1236,8 @@ var swiper = new Swiper(".treatments-swiper", {
                                 </div> -->
                                 <div class="appointment-item-content">
                                     <h3>Opening Hours</h3>
-                                    <p>Mon - Sat ( 09:00 - 21:00 )</p>
-                                    <p>Sunday ( Closed )</p>
+                                    <p>Mon - Sat( 09:00 - 21:00 )</p>
+                                    <p>Sunday( Closed )</p>
                                 </div>
                             </div>
                             <!-- Appointment Item End -->

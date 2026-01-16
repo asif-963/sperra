@@ -60,7 +60,7 @@
 
                 <!-- Mobile Appointment Button -->
                 <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
-                    Appointment
+                    Book Now
                 </a>
 
                 <!-- Toggle Button -->
@@ -115,7 +115,7 @@
 /* Mobile Appointment Button */
 .mobile-appointment-btn {
     display: none;
-    padding: 8px 14px;
+    padding: 15px 14px;
     font-size: 13px;
     white-space: nowrap;
 }
@@ -140,7 +140,12 @@
 
     .navbar-toggler {
         padding: 4px 8px;
+        border-color: #fff;
     }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
 
     .navbar-collapse {
         background: #fff;
@@ -216,7 +221,7 @@
                             <div class="contact-info-content">
                                 <h3>contact us</h3>
                                 <p>
-                                    <a href="tel:8592956000">(+91) 8592 956 000</a>
+                                    <a href="tel:8592956000">+91 8592956000</a>
                                 </p>
                             </div>
                         </div>
@@ -376,18 +381,13 @@
                                 </div>
 
                                 <!-- Phone -->
-                                <div class="form-group col-md-6 mb-4">
+                                <div class="form-group col-md-12 mb-4">
                                     <label for="phone" class="visually-hidden">Phone Number</label>
                                     <input type="tel" name="phone" id="phone" class="form-control"
                                         placeholder="Phone No." autocomplete="tel" required>
                                 </div>
 
-                                <!-- Email -->
-                                <div class="form-group col-md-6 mb-4">
-                                    <label for="email" class="visually-hidden">Email Address</label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Email Address" autocomplete="email" required>
-                                </div>
+                               
 
                                 <!-- Message -->
                                 <div class="form-group col-md-12 mb-5">

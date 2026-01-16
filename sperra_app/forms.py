@@ -61,4 +61,4 @@ TreatmentFAQFormSet = inlineformset_factory(
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
-        fields = ["first_name","last_name","phone", "email","message",]
+        fields = ["first_name","last_name","phone","message",]

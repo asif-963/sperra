@@ -60,7 +60,7 @@
 
                 <!-- Mobile Appointment Button -->
                 <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
-                    Appointment
+                    Book Now
                 </a>
 
                 <!-- Toggle Button -->
@@ -115,7 +115,7 @@
 /* Mobile Appointment Button */
 .mobile-appointment-btn {
     display: none;
-    padding: 8px 14px;
+    padding: 15px 14px;
     font-size: 13px;
     white-space: nowrap;
 }
@@ -140,7 +140,12 @@
 
     .navbar-toggler {
         padding: 4px 8px;
+        border-color: #fff;
     }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
 
     .navbar-collapse {
         background: #fff;
@@ -159,12 +164,12 @@
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
                         <h1 class="text-anime-style-3" data-cursor="-opaque">Appointment</h1>
-                        <nav class="wow fadeInUp">
+                        <!-- <nav class="wow fadeInUp">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{% url 'index' %}">home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Appointment</li>
                             </ol>
-                        </nav>
+                        </nav> -->
                     </div>
                     <!-- Page Header Box End -->
                 </div>
@@ -182,7 +187,7 @@
                     <div class="our-appointment-content">
                         <!-- Section Title Start -->
                         <div class="section-title">
-                            <h3 class="wow fadeInUp">appointment</h3>
+                            <!-- <h3 class="wow fadeInUp">appointment</h3> -->
                             <h2 class="text-anime-style-3" data-cursor="-opaque">Make an appointment</h2>
                         </div>
                         <!-- Section Title End -->
@@ -210,8 +215,8 @@
                                 </div> -->
                                 <div class="appointment-item-content">
                                     <h3>Opening Hours</h3>
-                                    <p>Mon - Sat ( 09:00 - 21:00 )</p>
-                                    <p>Sunday ( Closed )</p>
+                                    <p>Mon - Sat( 09:00 - 21:00 )</p>
+                                    <p>Sunday( Closed )</p>
                                 </div>
                             </div>
                             <!-- Appointment Item End -->
@@ -341,10 +346,7 @@
                                         required>
                                 </div>
 
-                                <div class="form-group col-md-12 mb-4">
-                                    <input type="email" name="email" class="form-control" placeholder="Email Address"
-                                        required>
-                                </div>
+                               
 
                                 <div class="form-group col-md-12 mb-4">
                                     <input type="text" name="phone" class="form-control" placeholder="Phone Number"
