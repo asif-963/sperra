@@ -1,0 +1,825 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog Details | Sperra Advanced Ayurveda{% endblock %}
+
+{% block css %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Awaiken">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-icon"><img src="{% static 'images/preloader.png' %}" alt=""></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <header class="main-header">
+    <div class="header-sticky bg-section">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid mobile-navbar">
+
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'images/logo-p.png' %}" alt="Logo">
+                </a>
+
+                <!-- Mobile Appointment Button -->
+                <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
+                    Book Now
+                </a>
+
+                <!-- Toggle Button -->
+                <button class="navbar-toggler navbar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="collapse navbar-collapse main-menu">
+                    <div class="nav-menu-wrapper">
+                        <ul class="navbar-nav mr-auto" id="menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'treatments' %}">Treatments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'our_doctors' %}">Our Doctors</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                        
+                            
+                        </ul>
+                    </div>
+
+                    <!-- Desktop Right Buttons -->
+                    <div class="header-contact-btn desktop-only">
+                        <a href="tel:8592956000" class="header-contact-now">
+                            <i class="fa-solid fa-phone"></i> +91 8592 956 000
+                        </a>
+                        <a href="{% url 'appointment' %}" class="btn-default">
+                            Make an Appointment
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="responsive-menu"></div>
+    </div>
+</header>
+<style>
+    /* Logo size */
+.navbar-brand img {
+    max-height: 35px;
+    width: auto;
+}
+
+/* Mobile Navbar Layout */
+.mobile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Mobile Appointment Button */
+.mobile-appointment-btn {
+    display: none;
+    padding: 15px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* Desktop Only */
+.desktop-only {
+    display: flex;
+}
+
+/* Responsive Rules */
+@media (max-width: 991px) {
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-appointment-btn {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .navbar-toggler {
+        padding: 4px 8px;
+        border-color: #fff;
+    }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+    .navbar-collapse {
+        background: #fff;
+        padding: 15px;
+    }
+}
+
+</style>
+    <!-- Header End -->
+
+    <!-- Page Header Section Start -->
+    <div class="page-header bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Frequently asked question</h1>
+                        <nav class="wow fadeInUp" data-wow-delay="0.25s">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">FAQs</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header Section End -->
+
+    <!-- Page Faqs Start -->
+    <div class="page-faqs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Page Single Sidebar Start -->
+                    <div class="page-single-sidebar">
+                        <!-- Page Single Category List Start -->
+                        <div class="page-single-category-list wow fadeInUp">
+                            <ul>
+                                <li><a href="#faq_1">General Information</a></li>
+                                <li><a href="#faq_2">Treatment Process</a></li>
+                                <li><a href="#faq_3">Safety & Results</a></li>
+                                <li><a href="#faq_4">Aftercare & Recovery</a></li>
+                            </ul>
+                        </div>
+                        <!-- Page Single Category List End -->
+
+                        <!-- Sidebar CTA Box Start -->
+                        <div class="sidebar-cta-box wow fadeInUp" data-wow-delay="0.25s">
+                            <!-- Sidebar CTA Image Start -->
+                            <div class="sidebar-cta-image">
+                                <figure>
+                                    <img src="images/sidebar-cta-bg.jpg" alt="">
+                                </figure>
+                            </div>
+                            <!-- Sidebar CTA Image End -->
+
+                            <!-- Sidebar CTA Item Start -->
+                            <div class="sidebar-cta-item">
+                                <!-- Icon Box Start -->
+                                <div class="icon-box">
+                                    <img src="images/icon-open-hour.svg" alt="">
+                                </div>
+                                <!-- Icon Box End -->
+
+                                <!-- Sidebar Cta Content Start -->
+                                <div class="sidebar-cta-content">
+                                    <h3>Opening Hours:</h3>
+                                    <p>Mon - Sat : 10.00 AM - 4.00PM</p>
+                                    <p>Sunday : Closed</p>
+                                </div>
+                                <!-- Sidebar Cta Content End -->
+                            </div>
+                            <!-- Sidebar CTA Item End -->
+                        </div>
+                        <!-- Sidebar CTA Box End -->
+                    </div>
+                    <!-- Page Single Sidebar End -->
+                </div>
+
+                <div class="col-lg-8">
+                    <!-- Page FAQs Catagery Start -->
+                    <div class="page-faqs-catagery">
+                        <!-- FAQs section start -->
+                        <div class="page-single-faqs page-faq-accordion" id="faq_1">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">General information</h2>
+                            </div>
+                            <!-- FAQ Accordion Start -->
+                            <div class="faq-accordion" id="accordion">
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp">
+                                    <h2 class="accordion-header" id="heading1">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                            1. What services does your clinic offer?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse1" class="accordion-collapse collapse show"
+                                        aria-labelledby="heading1" data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                    <h2 class="accordion-header" id="heading2">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false"
+                                            aria-controls="collapse2">
+                                            2. How do I know which treatment is right for me?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+                                        data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                    <h2 class="accordion-header" id="heading3">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false"
+                                            aria-controls="collapse3">
+                                            3. Is plastic surgery the only option for enhancing my appearance?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+                                        data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="accordion-header" id="heading4">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
+                                            aria-controls="collapse4">
+                                            4. How much do your treatments cost?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                                        data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                    <h2 class="accordion-header" id="heading5">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false"
+                                            aria-controls="collapse5">
+                                            5. Do I need an appointment, or can I walk in?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"
+                                        data-bs-parent="#accordion">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+                            </div>
+                            <!-- FAQ Accordion End -->
+                        </div>
+                        <!-- FAQs section End -->
+
+                        <!-- FAQs section start -->
+                        <div class="page-single-faqs page-faq-accordion" id="faq_2">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Treatment process</h2>
+                            </div>
+                            <!-- FAQ Accordion Start -->
+                            <div class="faq-accordion" id="accordion1">
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp">
+                                    <h2 class="accordion-header" id="heading6">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+                                            1. What happens during the initial consultation?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse6" class="accordion-collapse collapse show"
+                                        aria-labelledby="heading6" data-bs-parent="#accordion1">
+                                        <div class="accordion-body">
+                                            <p>Yes, we recommend booking your tee time in advance to ensure
+                                                availability. You can reserve your slot through our website, mobile app,
+                                                or by calling the clubhouse.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                    <h2 class="accordion-header" id="heading7">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false"
+                                            aria-controls="collapse7">
+                                            2. How long does a typical procedure take?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7"
+                                        data-bs-parent="#accordion1">
+                                        <div class="accordion-body">
+                                            <p>Yes, we recommend booking your tee time in advance to ensure
+                                                availability. You can reserve your slot through our website, mobile app,
+                                                or by calling the clubhouse.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                    <h2 class="accordion-header" id="heading8">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false"
+                                            aria-controls="collapse8">
+                                            3. Is the treatment painful?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8"
+                                        data-bs-parent="#accordion1">
+                                        <div class="accordion-body">
+                                            <p>Yes, we recommend booking your tee time in advance to ensure
+                                                availability. You can reserve your slot through our website, mobile app,
+                                                or by calling the clubhouse.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="accordion-header" id="heading9">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse9" aria-expanded="false"
+                                            aria-controls="collapse9">
+                                            4. Will I see results immediately?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="heading9"
+                                        data-bs-parent="#accordion1">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                    <h2 class="accordion-header" id="heading10">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse10" aria-expanded="false"
+                                            aria-controls="collapse10">
+                                            5. How many sessions are required for best results?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10"
+                                        data-bs-parent="#accordion1">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+                            </div>
+                            <!-- FAQ Accordion End -->
+                        </div>
+                        <!-- FAQs section End -->
+
+                        <!-- FAQs section start -->
+                        <div class="page-single-faqs page-faq-accordion" id="faq_3">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Safety & results</h2>
+                            </div>
+                            <!-- FAQ Accordion Start -->
+                            <div class="faq-accordion" id="accordion2">
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp">
+                                    <h2 class="accordion-header" id="heading11">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="true"
+                                            aria-controls="collapse11">
+                                            1. Are the treatments safe?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11"
+                                        data-bs-parent="#accordion2">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                    <h2 class="accordion-header" id="heading12">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse12" aria-expanded="false"
+                                            aria-controls="collapse12">
+                                            2. How long does a typical procedure take?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse12" class="accordion-collapse collapse" aria-labelledby="heading12"
+                                        data-bs-parent="#accordion2">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                    <h2 class="accordion-header" id="heading13">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse13" aria-expanded="false"
+                                            aria-controls="collapse13">
+                                            3. Is the treatment painful?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse13" class="accordion-collapse collapse" aria-labelledby="heading13"
+                                        data-bs-parent="#accordion2">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="accordion-header" id="heading14">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse14" aria-expanded="false"
+                                            aria-controls="collapse14">
+                                            4. Will I see results immediately?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse14" class="accordion-collapse collapse show"
+                                        aria-labelledby="heading14" data-bs-parent="#accordion2">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                    <h2 class="accordion-header" id="heading15">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse15" aria-expanded="false"
+                                            aria-controls="collapse15">
+                                            5. How many sessions are required for best results?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse15" class="accordion-collapse collapse" aria-labelledby="heading15"
+                                        data-bs-parent="#accordion2">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+                            </div>
+                            <!-- FAQ Accordion End -->
+                        </div>
+                        <!-- FAQs section End -->
+
+                        <!-- FAQs section start -->
+                        <div class="page-single-faqs page-faq-accordion" id="faq_4">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Aftercare & recovery</h2>
+                            </div>
+                            <!-- FAQ Accordion Start -->
+                            <div class="faq-accordion" id="accordion3">
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp">
+                                    <h2 class="accordion-header" id="heading16">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse16" aria-expanded="false"
+                                            aria-controls="collapse16">
+                                            1. Are the treatments safe?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse16" class="accordion-collapse collapse show"
+                                        aria-labelledby="heading16" data-bs-parent="#accordion3">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                    <h2 class="accordion-header" id="heading17">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse17" aria-expanded="false"
+                                            aria-controls="collapse17">
+                                            2. How long does a typical procedure take?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse17" class="accordion-collapse collapse" aria-labelledby="heading17"
+                                        data-bs-parent="#accordion3">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                    <h2 class="accordion-header" id="heading18">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse18" aria-expanded="false"
+                                            aria-controls="collapse18">
+                                            3. Is the treatment painful?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse18" class="accordion-collapse collapse" aria-labelledby="heading18"
+                                        data-bs-parent="#accordion3">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                    <h2 class="accordion-header" id="heading19">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse19" aria-expanded="false"
+                                            aria-controls="collapse19">
+                                            4. Will I see results immediately?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse19" class="accordion-collapse collapse" aria-labelledby="heading19"
+                                        data-bs-parent="#accordion3">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+
+                                <!-- FAQ Item Start -->
+                                <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                    <h2 class="accordion-header" id="heading20">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse20" aria-expanded="false"
+                                            aria-controls="collapse20">
+                                            5. How many sessions are required for best results?
+                                        </button>
+                                    </h2>
+                                    <div id="collapse20" class="accordion-collapse collapse" aria-labelledby="heading20"
+                                        data-bs-parent="#accordion3">
+                                        <div class="accordion-body">
+                                            <p>We provide a range of aesthetic treatments, including Botox, dermal
+                                                fillers, skin rejuvenation, and advanced cosmetic procedures tailored to
+                                                individual needs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FAQ Item End -->
+                            </div>
+                            <!-- FAQ Accordion End -->
+                        </div>
+                        <!-- FAQs section End -->
+                    </div>
+                    <!-- Page FAQs Catagery End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Faqs End -->
+
+    <!-- Footer Main Start -->
+    <footer class="main-footer bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Footer Header Start -->
+                    <div class="footer-header">
+
+                        <!-- Footer Newsletter Form End -->
+                    </div>
+                    <!-- Footer Header End -->
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <!-- About Footer start -->
+                    <div class="about-footer">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="{% static 'images/logo-w.png' %}" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- About Footer Content Start -->
+                        <div class="about-footer-content">
+                            <p>
+                                Delivering confidential, ethical, and personalized Ayurvedic care for sexual health and
+                                mental well-being.
+                            </p>
+                        </div>
+                        <!-- About Footer Content End -->
+
+                        <!-- Footer Social Link Start -->
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Social Link End -->
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="footer-links-box">
+                        <!-- Footer Links Start -->
+                        <div class="footer-links quick-links">
+                            <h3>quick link</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'about' %}">About us</a></li>
+                                <li><a href="services.html">services</a></li>
+                                <li><a href="{% url 'contact' %}">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+
+                        <!-- Footer Links Start -->
+                        <div class="footer-links">
+                            <h3>Open Hours:</h3>
+                            <ul>
+                                <li>Mon-Sat: 10:00 to 07:00</li>
+                                <li>Sunday-Closed</li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+                    </div>
+
+                    <!-- Footer Contact Box Start -->
+                    <div class="footer-contact-box">
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Contact:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <a href="tel:8592956000">+91 8592 956 000</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>E-mail:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <a href="mailto:sperrakottakkal@gmail.com">sperrakottakkal@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Address:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    Sperra Advanced Ayurveda,<br> Chinakkal, Nayadippara Road,<br>
+                                    Kottakkal, Malappuram,<br> Kerala – 676510
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Contact Box End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Section Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text">
+                            <p>Copyright © 2025 All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+
+
+                        <!-- Footer Privacy Policy End -->
+                    </div>
+                    <!-- Footer Copyright Section End -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Main End -->
+    <!-- jQuery Library -->
+    {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'js/parallaxie.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+    <script src="{% static 'js/magiccursor.js' %}"></script>
+    <script src="{% static 'js/SplitText.js' %}"></script>
+    <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'js/jquery.mb.YTPlayer.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/function.js' %}"></script>
+{% endblock %}

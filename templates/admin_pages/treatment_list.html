@@ -1,0 +1,606 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block title %}Treatments List | Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard__form__wraper">
+
+    <!-- HEADER -->
+    <div class="create__course__title mb-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <h4 class="mb-0">Treatment List</h4>
+
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <input type="text" id="treatmentSearchInput" class="form-control form-control-sm"
+                placeholder="Search treatments...">
+        </div>
+
+        <a href="{% url 'treatment_create' %}" class="btn btn-success btn-sm">
+            <i class="fas fa-plus"></i> New treatment
+        </a>
+    </div>
+
+    <!-- TABLE -->
+    <div class="custom-table-container">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>FAQs</th>
+                    <th>Date</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for treatment in treatments %}
+                <tr>
+                    <td>
+                        {% if treatment.image %}
+                        <img src="{{ treatment.image.url }}" class="rounded">
+                        {% else %}
+                        <img src="https://via.placeholder.com/80x60?text=No+Image" class="rounded">
+                        {% endif %}
+                    </td>
+
+                    <td>{{ treatment.title }}</td>
+
+                    <td class="description-cell">
+                        {{ treatment.description|truncatechars:30|safe }}
+                    </td>
+
+                    <td>
+                        <span class="badge bg-primary">
+                            {{ treatment.faqs.count }} FAQs
+                        </span>
+                    </td>
+
+                    <td>{{ treatment.created_at|date:"M d, Y" }}</td>
+
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#updateTreatmentModal{{ treatment.id }}">
+                                Update
+                            </button>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteTreatmentModal{{ treatment.id }}">
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        No treatments found.
+                        <a href="{% url 'treatment_create' %}">Add your first treatment</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        <!-- Pagination Controls -->
+        {% if treatments.has_other_pages %}
+        <nav aria-label="Treatments pagination">
+            <ul class="pagination justify-content-center mt-4">
+
+                <!-- First & Previous -->
+                {% if treatments.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        &laquo;&laquo;
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ treatments.previous_page_number }}" aria-label="Previous">
+                        &laquo;
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">&laquo;&laquo;</span></li>
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                {% for i in treatments.paginator.page_range %}
+                {% if treatments.number == i %}
+                <li class="page-item active">
+                    <span class="page-link">{{ i }}</span>
+                </li>
+                {% elif i > treatments.number|add:"-3" and i < treatments.number|add:"3" %} <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Next & Last -->
+                    {% if treatments.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ treatments.next_page_number }}" aria-label="Next">
+                            &raquo;
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ treatments.paginator.num_pages }}" aria-label="Last">
+                            &raquo;&raquo;
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    <li class="page-item disabled"><span class="page-link">&raquo;&raquo;</span></li>
+                    {% endif %}
+
+            </ul>
+        </nav>
+        {% endif %}
+
+    </div>
+</div>
+
+<!-- ================= MODALS ================= -->
+
+{% for treatment in treatments %}
+
+<!-- UPDATE MODAL -->
+<div class="modal fade" id="updateTreatmentModal{{ treatment.id }}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- FORM -->
+            <form method="post" enctype="multipart/form-data" action="{% url 'treatment_update' treatment.id %}">
+
+                {% csrf_token %}
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">Update Treatment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Treatment Title</label>
+                        <input type="text" name="title" class="form-control" value="{{ treatment.title }}" required>
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <label class="form-label">Treatment Description <span class="text-danger">*</span></label>
+                        <textarea name="description" id="description" class="form-control modern-input" rows="10"
+                            placeholder="Write treatment details here" required>{{ treatment.description }}</textarea>
+                    </div>
+
+                    <!-- Description -->
+
+
+                    <!-- Image -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Cover Image</label>
+                        <input type="file" name="image" class="form-control" accept="image/*"
+                            onchange="previewImage(event, '{{ treatment.id }}')">
+
+                        <div class="mt-2">
+                            {% if treatment.image %}
+                            <img id="preview{{ treatment.id }}" src="{{ treatment.image.url }}"
+                                class="img-fluid rounded" style="max-width:150px;">
+                            {% else %}
+                            <img id="preview{{ treatment.id }}" src="https://via.placeholder.com/150x100"
+                                class="img-fluid rounded">
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- FAQs -->
+                    <div class="mb-3">
+                        <label class="fw-bold d-block mb-2">
+                            FAQs ({{ treatment.faqs.count }})
+                        </label>
+
+                        <div class="border rounded p-3 faq-scroll-area" style="max-height:260px; overflow-y:auto;">
+
+                            {% for faq in treatment.faqs.all %}
+                            <div class="faq-item mb-3 p-3 border rounded position-relative">
+
+                                <input type="hidden" name="faq_id[]" value="{{ faq.id }}">
+
+
+
+                                <input type="text" name="faq_question_{{ faq.id }}" class="form-control mb-2"
+                                    value="{{ faq.question }}" placeholder="FAQ Question">
+
+                                <textarea name="faq_answer_{{ faq.id }}" class="form-control" rows="3"
+                                    placeholder="FAQ Answer">{{ faq.answer }}</textarea>
+
+                                <!-- Remove button -->
+                                <button type="button" class="btn btn-outline-danger btn-sm mt-2 remove-faq-btn">
+                                    Remove FAQ
+                                </button>
+                            </div>
+                            {% empty %}
+                            <p class="text-muted mb-0">No FAQs added</p>
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- Add FAQ -->
+                        <button type="button" class="btn btn-outline-primary btn-sm mt-3"
+                            id="addFaqBtn{{ treatment.id }}">
+                            + Add FAQ
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success px-4">
+                        Save Changes
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+
+            </form>
+            <!-- /FORM -->
+
+
+        </div>
+        <script>
+            /* Image preview */
+            function previewImage(event, id) {
+                const img = document.getElementById('preview' + id);
+                img.src = URL.createObjectURL(event.target.files[0]);
+            }
+
+            /* FAQ logic */
+            (function () {
+
+                // Remove FAQ
+                document.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('remove-faq-btn')) {
+                        e.target.closest('.faq-item').remove();
+                    }
+                });
+
+                // Add new FAQ
+                document.getElementById('addFaqBtn{{ treatment.id }}')
+                    ?.addEventListener('click', function () {
+
+                        const container = document.querySelector(
+                            '#updateTreatmentModal{{ treatment.id }} .faq-scroll-area'
+                        );
+
+                        const uid = Date.now();
+
+                        const html = `
+        <div class="faq-item mb-3 p-3 border rounded position-relative">
+            <button type="button"
+                    class="btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-2 remove-faq-btn">
+                ✖
+            </button>
+
+            <input type="text"
+                   name="new_faq_question_${uid}"
+                   class="form-control mb-2"
+                   placeholder="FAQ Question">
+
+            <textarea name="new_faq_answer_${uid}"
+                      class="form-control"
+                      rows="3"
+                      placeholder="FAQ Answer"></textarea>
+        </div>
+        `;
+
+                        container.insertAdjacentHTML('beforeend', html);
+                    });
+
+            })();
+        </script>
+
+
+    </div>
+</div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal fade" id="deleteTreatmentModal{{ treatment.id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <form method="post" action="{% url 'treatment_delete' treatment.id %}">
+                {% csrf_token %}
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Treatment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    Are you sure you want to delete
+                    <strong>{{ treatment.title }}</strong>?
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let descriptionEditor; // store CKEditor instance
+
+        // Initialize CKEditor
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+                toolbar: [
+                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList',
+                    '|', 'insertTable', 'blockQuote', 'undo', 'redo', 'imageUpload'
+                ]
+            })
+            .then(editor => {
+                descriptionEditor = editor;
+
+                // Base64 image upload
+                editor.plugins.get('FileRepository').createUploadAdapter = loader => {
+                    return {
+                        upload: () => loader.file.then(file => new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve({ default: reader.result });
+                            reader.onerror = error => reject(error);
+                            reader.readAsDataURL(file);
+                        })),
+                        abort: () => { }
+                    };
+                };
+            })
+            .catch(error => console.error(error));
+
+        // Blog cover image preview
+        const imageInput = document.getElementById('image');
+        const imagePreview = document.getElementById('imagePreview');
+        imageInput.addEventListener('change', function () {
+            imagePreview.innerHTML = '';
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.style.display = 'flex';
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                };
+                reader.readAsDataURL(this.files[0]);
+            } else {
+                imagePreview.style.display = 'none';
+            }
+        });
+
+        // Form validation
+        const form = document.querySelector('form');
+        const fields = {
+            title: {
+                element: document.getElementById('title'),
+                error: document.createElement('div'),
+                validate: function (value) {
+                    if (!value.trim()) return "Blog title is required.";
+                    return null;
+                }
+            },
+            image: {
+                element: imageInput,
+                error: document.createElement('div'),
+                validate: function (file) {
+                    if (!file) return "Blog cover image is required.";
+                    if (!file.type.startsWith('image/')) return "Please upload a valid image.";
+                    return null;
+                }
+            },
+            description: {
+                element: document.getElementById('description'),
+                error: document.createElement('div'),
+                validate: function (value) {
+                    if (!value.trim()) return "Blog content is required.";
+                    return null;
+                }
+            }
+        };
+
+        // Insert error elements
+        Object.values(fields).forEach(f => {
+            f.error.classList.add('text-danger', 'mt-1');
+            f.element.insertAdjacentElement('afterend', f.error);
+        });
+
+        function validateField(fieldName) {
+            const field = fields[fieldName];
+            let value = field.element.value;
+
+            if (fieldName === 'image') value = field.element.files[0] || null;
+            if (fieldName === 'description' && descriptionEditor) value = descriptionEditor.getData().replace(/<[^>]*>/g, '').trim();
+
+            const error = field.validate(value);
+
+            field.error.textContent = error || '';
+            field.error.style.display = error ? 'block' : 'none';
+            if (error) field.element.classList.add('field-error-border');
+            else field.element.classList.remove('field-error-border');
+
+            return !error;
+        }
+
+        function validateForm() {
+            return Object.keys(fields).every(validateField);
+        }
+
+        // Field events for live validation
+        Object.keys(fields).forEach(fieldName => {
+            const field = fields[fieldName];
+            if (field.element.tagName.toLowerCase() === 'textarea' || field.element.type === 'text') {
+                field.element.addEventListener('blur', () => validateField(fieldName));
+                field.element.addEventListener('input', () => { if (field.error.textContent) validateField(fieldName); });
+            } else if (field.element.type === 'file') {
+                field.element.addEventListener('change', () => validateField(fieldName));
+            }
+        });
+
+        // CKEditor events
+        if (descriptionEditor) {
+            descriptionEditor.model.document.on('change:data', () => {
+                if (fields.description.error.textContent) validateField('description');
+            });
+        }
+
+        // Form submit
+        form.addEventListener('submit', function (e) {
+            if (!validateForm()) {
+                e.preventDefault();
+                const firstErrorField = Object.keys(fields).find(f => fields[f].error.textContent);
+                if (firstErrorField) fields[firstErrorField].element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("treatmentSearchInput");
+        const tableBody = document.querySelector(".custom-table-container table tbody");
+
+        if (!searchInput || !tableBody) return;
+
+        const rows = Array.from(tableBody.querySelectorAll("tr")).filter(
+            (row) => !row.id || row.id !== "noResultRow"
+        );
+
+        // Debounce helper — avoids lag on fast typing
+        function debounce(fn, delay) {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => fn.apply(this, args), delay);
+            };
+        }
+
+        // Core search logic
+        function performSearch() {
+            const searchText = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            // Reset any previous highlights
+            rows.forEach((row) => {
+                const titleCell = row.querySelector("td:nth-child(2)");
+                if (titleCell && titleCell.hasAttribute("data-original-text")) {
+                    titleCell.innerHTML = titleCell.getAttribute("data-original-text");
+                }
+            });
+
+            rows.forEach((row) => {
+                const titleCell = row.querySelector("td:nth-child(2)");
+                const title = titleCell ? titleCell.textContent.toLowerCase() : "";
+
+                if (searchText === "" || title.includes(searchText)) {
+                    row.style.display = "";
+                    visibleCount++;
+
+                    if (searchText !== "") highlightMatch(titleCell, searchText);
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            handleNoResults(visibleCount, searchText);
+        }
+
+        // Highlight matches
+        function highlightMatch(cell, text) {
+            if (!cell) return;
+            const original = cell.textContent;
+            cell.setAttribute("data-original-text", original);
+            const regex = new RegExp(`(${escapeRegex(text)})`, "gi");
+            cell.innerHTML = original.replace(
+                regex,
+                `<mark style="background-color:#fff3cd;padding:2px 4px;border-radius:3px;">$1</mark>`
+            );
+        }
+
+        // Prevent regex injection
+        function escapeRegex(str) {
+            return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        }
+
+        // Show or hide "no results"
+        function handleNoResults(visibleCount, searchText) {
+            let noResultRow = document.getElementById("noResultRow");
+
+            if (visibleCount === 0 && searchText !== "") {
+                if (!noResultRow) {
+                    noResultRow = document.createElement("tr");
+                    noResultRow.id = "noResultRow";
+                    tableBody.appendChild(noResultRow);
+                }
+                const colCount = rows[0]?.querySelectorAll("td").length || 5;
+
+                noResultRow.innerHTML = `
+                <td colspan="${colCount}" class="text-center py-4 text-muted">
+                    <div style="margin-bottom:0.5rem;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="opacity:0.5;margin:auto;">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                    No results found for "<strong>${escapeHtml(searchText)}</strong>"
+                    <div style="font-size:0.875rem;margin-top:0.5rem;color:#adb5bd;">
+                        Try adjusting your search term
+                    </div>
+                </td>`;
+                noResultRow.style.display = "";
+            } else if (noResultRow) {
+                noResultRow.style.display = "none";
+            }
+        }
+
+        // Prevent XSS
+        function escapeHtml(str) {
+            const div = document.createElement("div");
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // Attach event listeners
+        searchInput.addEventListener("input", debounce(performSearch, 150));
+    });
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .custom-table-container img {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+    }
+
+    .description-cell {
+        max-width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+{% endblock %}

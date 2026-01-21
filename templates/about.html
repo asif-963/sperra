@@ -1,0 +1,933 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | Sperra Advanced Ayurveda{% endblock %}
+
+{% block css %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Awaiken">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <style>
+        .navbar-brand img { max-height: 35px; width: auto; }
+        .mobile-navbar { display: flex; align-items: center; justify-content: space-between; }
+        .mobile-appointment-btn { display: none; padding: 15px 14px; font-size: 13px; white-space: nowrap; }
+        .desktop-only { display: flex; }
+        @media (max-width: 991px) {
+            .desktop-only { display: none; }
+            .mobile-appointment-btn { display: inline-block; margin-left: auto; margin-right: 10px; }
+            .navbar-toggler { padding: 4px 8px; border-color: #fff; }
+            .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
+            .navbar-collapse { background: #fff; padding: 15px; }
+        }
+
+        /* Language Switcher Styling */
+        .language-selector { position: relative; display: flex; align-items: center; justify-content: center; margin-left: 20px; width: 30px; height: 30px; cursor: pointer; z-index: 100; }
+        .lang-icon i { color: #16243d; font-size: 20px; transition: color 0.3s ease; }
+        .language-selector:hover .lang-icon i { color: #662D91; }
+        #google_translate_element { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; overflow: hidden; z-index: 10; }
+        .goog-te-gadget-simple { width: 100% !important; height: 100% !important; padding: 0 !important; margin: 0 !important; border: none !important; display: block !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget { color: transparent !important; }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-icon"><img src="{% static 'images/preloader.png' %}" alt=""></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <header class="main-header">
+    <div class="header-sticky bg-section">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid mobile-navbar">
+
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'images/logo-p.png' %}" alt="Logo">
+                </a>
+
+                <!-- Mobile Appointment Button -->
+                <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
+                    Book Now
+                </a>
+
+                <!-- Toggle Button -->
+                <button class="navbar-toggler navbar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="collapse navbar-collapse main-menu">
+                    <div class="nav-menu-wrapper">
+                        <ul class="navbar-nav mr-auto" id="menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'treatments' %}">Treatments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'our_doctors' %}">Our Doctors</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                        
+                            
+                        </ul>
+                    </div>
+
+                    <!-- Desktop Right Buttons -->
+                    <div class="header-contact-btn desktop-only">
+                        <a href="tel:8592956000" class="header-contact-now">
+                            <i class="fa-solid fa-phone"></i> +91 8592 956 000
+                        </a>
+                        <a href="{% url 'appointment' %}" class="btn-default">
+                            Make an Appointment
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="responsive-menu"></div>
+    </div>
+</header>
+<style>
+    /* Logo size */
+.navbar-brand img {
+    max-height: 35px;
+    width: auto;
+}
+
+/* Mobile Navbar Layout */
+.mobile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Mobile Appointment Button */
+.mobile-appointment-btn {
+    display: none;
+    padding: 15px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* Desktop Only */
+.desktop-only {
+    display: flex;
+}
+
+/* Responsive Rules */
+@media (max-width: 991px) {
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-appointment-btn {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .navbar-toggler {
+        padding: 4px 8px;
+        border-color: #fff;
+    }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+    .navbar-collapse {
+        background: #fff;
+        padding: 15px;
+    }
+}
+
+
+</style>
+    <!-- Header End -->
+
+    <!-- Page Header Start -->
+    <div class="page-header bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">About us</h1>
+                        <nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">about us</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+
+    <!-- About Us Section Start -->
+    <div class="about-us">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Images -->
+                <div class="col-lg-6">
+                    <div class="about-us-images">
+                        <div class="about-img-1">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/about-img-1.jpg' %}"
+                                    alt="Sperra Advanced Ayurveda clinic in Kottakkal">
+                            </figure>
+                        </div>
+
+                        <div class="about-img-2">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/about-img-2.jpg' %}"
+                                    alt="Ayurvedic sexual wellness and mental health care">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="col-lg-6">
+                    <div class="about-us-content">
+
+                        <!-- Section Title -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">About Us</h3>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                                Holistic Ayurvedic Care for Sexual & Mental Wellness
+                            </h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                Sperra Advanced Ayurveda is a trusted sexual wellness and mental health clinic in
+                                Kottakkal, Kerala, providing confidential and holistic Ayurvedic care for men and women.
+                                We specialize in sexual health, infertility treatment, and psychiatry with a strong
+                                focus on long-term healing.
+                            </p>
+                        </div>
+
+                        <!-- Experience Box -->
+                        <div class="about-experience-box">
+                            <div class="about-experience-list wow fadeInUp" data-wow-delay="0.4s">
+                                <ul>
+                                    <li>Confidential & Ethical Medical Care</li>
+                                    <li>Root-Cause Focused Ayurvedic Treatment</li>
+                                    <li>Personalized Holistic Healing Plans</li>
+                                </ul>
+                            </div>
+
+                            <div class="about-experience-image">
+                                <figure class="image-anime reveal">
+                                    <img src="{% static 'images/about-experience-image.jpg' %}"
+                                        alt="Trusted Ayurvedic clinic in Kerala">
+                                </figure>
+                            </div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="about-us-body wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="about-contact-box">
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="about-contact-box-content">
+                                    <p>Need Confidential Consultation?</p>
+                                    <h3>
+                                        <a href="tel:+918592956000">+91 8592 956 000</a>
+                                    </h3>
+                                </div>
+                            </div>
+
+                            <div class="about-us-btn">
+                                <a href="{% url 'contact' %}" class="btn-default">
+                                    Book Appointment
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- About Us Section End -->
+
+
+<!-- Page Team Single Start -->
+<div class="page-team-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- Page Team Single Box Start -->
+                <div class="page-team-single-box">
+
+                    <!-- Team Member Info Box Start -->
+                    <div class="team-member-info-box">
+
+                        <!-- Team Member Image Start -->
+                        <div class="team-member-image">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/doctor.jpg' %}" alt="Dr. Parasuram Kooderi - Ayurvedic Psychiatry & Sexual Medicine Specialist">
+                            </figure>
+                        </div>
+                        <!-- Team Member Image End -->
+
+                        <!-- Team Member Content Start -->
+                        <div class="team-member-content">
+
+                            <!-- Member Content Header Start -->
+                            <div class="section-title">
+                                <h3 class="wow fadeInUp">
+                                    Ayurvedic Psychiatry, Sexual Medicine & Infertility Specialist
+                                </h3>
+
+                                <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                                    About Dr. Parasuram Kooderi
+                                </h2>
+
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                    <strong>Dr. Parasuram Kooderi, BAMS, MD (Ayurveda – Psychiatry)</strong> is a highly
+                                    experienced Ayurvedic physician specializing in sexual health, infertility
+                                    management, and mental well-being. He is widely respected for his ethical medical
+                                    practice, patient-centered approach, and commitment to confidentiality.
+                                </p>
+
+                                <p class="wow fadeInUp" data-wow-delay="0.3s">
+                                    With extensive clinical experience, including <strong>three years of international
+                                    medical practice in Russia</strong>, Dr. Parasuram has successfully managed
+                                    <strong>200+ infertility cases</strong> and numerous sexual and psychological health
+                                    conditions. He currently serves as the <strong>Project Medical Officer</strong> at
+                                    the Government Ayurveda Mental Hospital, Kottakkal.
+                                </p>
+
+                                <p class="wow fadeInUp" data-wow-delay="0.4s">
+                                    Through <strong>Sperra Advanced Ayurveda</strong>, Dr. Parasuram integrates classical
+                                    Ayurvedic wisdom with modern clinical evaluation to deliver personalized,
+                                    root-cause–oriented treatment. His approach emphasizes safe, natural, and
+                                    long-term healing in a respectful, judgment-free environment.
+                                </p>
+                            </div>
+                            <!-- Member Content Header End -->
+
+                            <!-- Member Social List Start -->
+                            <div class="member-social-list wow fadeInUp" data-wow-delay="0.6s">
+                                <ul>
+                                    <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- Member Social List End -->
+
+                        </div>
+                        <!-- Team Member Content End -->
+
+                    </div>
+                    <!-- Team Member Info Box End -->
+
+                </div>
+                <!-- Page Team Single Box End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Team Single End -->
+
+
+
+    <!-- Our Approach Section Start -->
+    <div class="our-approach bg-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Content -->
+                <div class="col-lg-6">
+                    <div class="our-approach-content">
+
+                        <!-- Section Title -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">Our Approach</h3>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                                Ethical, Holistic & Root-Cause Focused Ayurvedic Care
+                            </h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                At Sperra Advanced Ayurveda, our approach is centered on confidential, patient-focused,
+                                and evidence-based Ayurvedic treatment. We focus on identifying the root cause of sexual
+                                health concerns, infertility, and mental health conditions rather than offering
+                                temporary symptom relief.
+                            </p>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="our-approach-body wow fadeInUp" data-wow-delay="0.4s">
+
+                            <!-- Mission -->
+                            <div class="mission-vison-item">
+                                <div class="icon-box">
+                                    <img src="{% static 'images/icon-mission.svg' %}"
+                                        alt="Sperra Advanced Ayurveda mission">
+                                </div>
+                                <div class="mission-vison-content">
+                                    <h3>Our Mission</h3>
+                                    <p>
+                                        To deliver ethical, confidential, and holistic healthcare through Ayurveda,
+                                        helping individuals achieve improved sexual wellness, mental well-being, and
+                                        overall quality of life through safe and personalized treatment plans.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Vision -->
+                            <div class="mission-vison-item">
+                                <div class="icon-box">
+                                    <img src="{% static 'images/icon-vision.svg' %}"
+                                        alt="Sperra Advanced Ayurveda vision">
+                                </div>
+                                <div class="mission-vison-content">
+                                    <h3>Our Vision</h3>
+                                    <p>
+                                        To become a leading sexual wellness and mental health clinic in Kerala,
+                                        recognized for medical integrity, patient trust, and excellence in Ayurvedic
+                                        sexual health and psychiatry, both nationally and internationally.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Images -->
+                <div class="col-lg-6">
+                    <div class="approach-image">
+                        <div class="approach-img-1">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/approach-image-2.jpg' %}"
+                                    alt="Ayurvedic consultation at Sperra Advanced Ayurveda">
+                            </figure>
+                        </div>
+
+                        <div class="approach-img-2">
+                            <figure class="image-anime">
+                                <img src="{% static 'images/approach-image-1.jpg' %}"
+                                    alt="Holistic Ayurvedic treatment and care">
+                            </figure>
+                        </div>
+
+                        <!-- Support Box -->
+                        <div class="approach-support-box">
+                            <div class="icon-box">
+                                <img src="{% static 'images/icon-phone.svg' %}" alt="Contact Sperra Advanced Ayurveda">
+                            </div>
+                            <div class="approach-support-box-content">
+                                <h3>Confidential Support</h3>
+                                <p>
+                                    <a href="tel:+918592956000">+91 8592 956 000</a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Our Approach Section End -->
+    <!-- What We Do section Start -->
+    <div class="what-we-do">
+        <div class="container">
+            <div class="row align-items-center">
+
+
+                <div class="col-lg-8 col-md-6">
+                    <!-- What We Content Start -->
+                    <div class="what-we-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">What We Do</h3>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                                Holistic Care for Sexual & Mental Well-Being
+                            </h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.25s">
+                                At Sperra Advanced Ayurveda, we specialize in treating sexual health disorders, male and
+                                female infertility, stress-related conditions, anxiety, sleep disturbances, and
+                                emotional imbalance through authentic Ayurvedic medicine. Each treatment is carefully
+                                customized after detailed diagnosis, ensuring ethical care, complete privacy, and
+                                solutions tailored to individual health needs.
+                            </p>
+
+                            <p class="wow fadeInUp" data-wow-delay="0.3s">
+                                Our approach combines traditional Ayurvedic principles with modern clinical
+                                understanding, focusing on lifestyle correction, herbal therapies, and preventive care.
+                                By addressing both physical and psychological factors, we aim to restore balance,
+                                improve quality of life, and support long-term sexual and mental wellness for our
+                                patients in Kottakkal and across Kerala.
+                            </p>
+
+
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- About Experience List Start -->
+                        <div class="about-experience-list wow fadeInUp" data-wow-delay="0.4s">
+                            <ul>
+                                <li>Confidential Sexual Wellness Treatment</li>
+                                <li>Ayurvedic Psychiatry & Mental Health Care</li>
+                                <li>Personalized Holistic Healing Plans</li>
+                            </ul>
+                        </div>
+                        <!-- About Experience List End -->
+
+                        <!-- What We Button Start -->
+                        <div class="what-we-btn wow fadeInUp" data-wow-delay="0.6s">
+                            <a href="{% url 'contact' %}" class="btn-default">Book a Consultation</a>
+                        </div>
+                        <!-- What We Button End -->
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- What We Image Start -->
+                    <div class="what-we-image-2">
+                        <figure class="image-anime">
+                            <img src="{% static 'images/what-we-image-2.jpg' %}"
+                                alt="Trusted Ayurvedic clinic in Kottakkal">
+                        </figure>
+
+                        <!-- Experience Box Start -->
+                        <div class="experirnce-box">
+                            <h2><span class="counter">10</span>+</h2>
+                            <p>Years of Clinical Experience</p>
+                        </div>
+                        <!-- Experience Box End -->
+                    </div>
+                    <!-- What We Image End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- What We Do section End -->
+
+    <!-- Our Journey Section Start -->
+    <div class="our-journey dark-section bg-section">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Images -->
+                <div class="col-lg-6">
+                    <div class="our-journey-image">
+
+                        <div class="journey-img">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/journey-img-1.jpg' %}"
+                                    alt="Sperra Advanced Ayurveda clinic journey">
+                            </figure>
+                        </div>
+
+                        <div class="journey-img">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/journey-img-2.jpg' %}"
+                                    alt="Ayurvedic consultation and patient care">
+                            </figure>
+                        </div>
+
+                        <div class="journey-image-box">
+                            <div class="journey-img">
+                                <figure class="image-anime reveal">
+                                    <img src="{% static 'images/journey-img-3.jpg' %}"
+                                        alt="Holistic Ayurvedic treatment process">
+                                </figure>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="col-lg-6">
+                    <div class="our-journey-content">
+
+                        <!-- Section Title -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">Our Journey</h3>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                                A Journey of Healing, Trust & Holistic Wellness
+                            </h2>
+                        </div>
+
+                        <!-- Journey List -->
+                        <div class="our-journey-list wow fadeInUp" data-wow-delay="0.4s">
+                            <ul>
+                                <li>Years of Trusted Ayurvedic Practice</li>
+                                <li>Ethical & Confidential Medical Care</li>
+                                <li>Root-Cause Focused Healing Approach</li>
+                                <li>Commitment to Long-Term Wellness</li>
+                            </ul>
+                        </div>
+
+                        <!-- Journey Body -->
+                        <div class="our-journey-body wow fadeInUp" data-wow-delay="0.6s">
+
+                            <div class="journey-item">
+                                <div class="icon-box">
+                                    <img src="{% static 'images/icon-journey-1.svg' %}"
+                                        alt="Ayurvedic sexual wellness expertise">
+                                </div>
+                                <div class="journey-item-content">
+                                    <h3>Advancing Sexual & Mental Wellness Through Ayurveda</h3>
+                                </div>
+                            </div>
+
+                            <div class="journey-item">
+                                <div class="icon-box">
+                                    <img src="{% static 'images/icon-journey-2.svg' %}"
+                                        alt="Patient-centered Ayurvedic care">
+                                </div>
+                                <div class="journey-item-content">
+                                    <h3>Patient-Centered Care Built on Trust & Integrity</h3>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Button -->
+                        <div class="our-journey-btn wow fadeInUp" data-wow-delay="0.8s">
+                            <a href="{% url 'contact' %}" class="btn-default btn-highlighted">
+                                Book a Confidential Consultation
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Our Journey Section End -->
+
+
+
+
+    <!-- Our Faqs Section Start -->
+    <div class="our-faqs">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Images -->
+                <div class="col-lg-6">
+                    <div class="our-faqs-images">
+
+                        <div class="faqs-img-1">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/faq-img-1.jpg' %}"
+                                    alt="Ayurvedic consultation at Sperra Advanced Ayurveda">
+                            </figure>
+                        </div>
+
+                        <div class="faqs-img-2">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/faq-img-2.jpg' %}"
+                                    alt="Confidential Ayurvedic treatment session">
+                            </figure>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="col-lg-6">
+                    <div class="our-faqs-content">
+
+                        <!-- Section Title -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">Frequently Asked Questions</h3>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                                Got Questions? We’re Here to Help.
+                            </h2>
+                        </div>
+
+                        <!-- FAQ Accordion -->
+                        <div class="faq-accordion" id="accordion">
+
+                            <!-- FAQ 1 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                <h2 class="accordion-header" id="heading1">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                        1. What conditions are treated at Sperra Advanced Ayurveda?
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            We provide Ayurvedic treatment for sexual health disorders, male and female
+                                            infertility, stress, anxiety, sleep disorders, and mental wellness concerns
+                                            using safe and natural therapies.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 2 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                <h2 class="accordion-header" id="heading2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                        2. Are consultations and treatments confidential?
+                                    </button>
+                                </h2>
+                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Yes. All consultations and treatments are handled with complete privacy,
+                                            professionalism, and strict confidentiality to ensure patient comfort and
+                                            trust.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 3 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                <h2 class="accordion-header" id="heading3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        3. Is Ayurvedic treatment safe for long-term use?
+                                    </button>
+                                </h2>
+                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Ayurvedic treatments are natural and focus on root-cause healing. When
+                                            prescribed by qualified Ayurvedic physicians, they are safe and suitable for
+                                            long-term wellness.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 4 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                <h2 class="accordion-header" id="heading4">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        4. Do I need an appointment before visiting the clinic?
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Yes, prior appointment is recommended to ensure dedicated consultation time
+                                            and personalized care. You can book an appointment by phone or through our
+                                            website.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- FAQ Accordion End -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Our Faqs Section End -->
+
+    <!-- Footer Main Start -->
+    <footer class="main-footer bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Footer Header Start -->
+                    <div class="footer-header">
+
+                        <!-- Footer Newsletter Form End -->
+                    </div>
+                    <!-- Footer Header End -->
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <!-- About Footer start -->
+                    <div class="about-footer">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="{% static 'images/logo-w.png' %}" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- About Footer Content Start -->
+                        <div class="about-footer-content">
+                            <p>
+                                Delivering confidential, ethical, and personalized Ayurvedic care for sexual health and
+                                mental well-being.
+                            </p>
+                        </div>
+                        <!-- About Footer Content End -->
+
+                        <!-- Footer Social Link Start -->
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Social Link End -->
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="footer-links-box">
+                        <!-- Footer Links Start -->
+                        <div class="footer-links quick-links">
+                            <h3>quick link</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'about' %}">About us</a></li>
+                                <li><a href="services.html">services</a></li>
+                                <li><a href="{% url 'contact' %}">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+
+                        <!-- Footer Links Start -->
+                        <div class="footer-links">
+                            <h3>Open Hours:</h3>
+                            <ul>
+                                <li>Mon-Sat: 10:00 to 07:00</li>
+                                <li>Sunday-Closed</li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+                    </div>
+
+                    <!-- Footer Contact Box Start -->
+                    <div class="footer-contact-box">
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Contact:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <a href="tel:8592956000">+91 8592 956 000</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>E-mail:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <a href="mailto:sperrakottakkal@gmail.com">sperrakottakkal@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Address:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    Sperra Advanced Ayurveda,<br> Chinakkal, Nayadippara Road,<br>
+                                    Kottakkal, Malappuram,<br> Kerala – 676510
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Contact Box End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Section Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text">
+                            <p>Copyright © 2025 All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+
+
+                        <!-- Footer Privacy Policy End -->
+                    </div>
+                    <!-- Footer Copyright Section End -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Main End -->
+    <!-- jQuery Library -->
+    {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'js/parallaxie.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+    <script src="{% static 'js/magiccursor.js' %}"></script>
+    <script src="{% static 'js/SplitText.js' %}"></script>
+    <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'js/jquery.mb.YTPlayer.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/function.js' %}"></script>
+{% endblock %}

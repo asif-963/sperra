@@ -1,0 +1,560 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog Details | Sperra Advanced Ayurveda{% endblock %}
+
+{% block css %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Awaiken">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-icon"><img src="{% static 'images/preloader.png' %}" alt=""></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <header class="main-header">
+    <div class="header-sticky bg-section">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid mobile-navbar">
+
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'images/logo-p.png' %}" alt="Logo">
+                </a>
+
+                <!-- Mobile Appointment Button -->
+                <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
+                    Book Now
+                </a>
+
+                <!-- Toggle Button -->
+                <button class="navbar-toggler navbar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="collapse navbar-collapse main-menu">
+                    <div class="nav-menu-wrapper">
+                        <ul class="navbar-nav mr-auto" id="menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'treatments' %}">Treatments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'our_doctors' %}">Our Doctors</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                        
+                          
+                        </ul>
+                    </div>
+
+                    <!-- Desktop Right Buttons -->
+                    <div class="header-contact-btn desktop-only">
+                        <a href="tel:8592956000" class="header-contact-now">
+                            <i class="fa-solid fa-phone"></i> +91 8592 956 000
+                        </a>
+                        <a href="{% url 'appointment' %}" class="btn-default">
+                            Make an Appointment
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="responsive-menu"></div>
+    </div>
+</header>
+<style>
+    /* Logo size */
+.navbar-brand img {
+    max-height: 35px;
+    width: auto;
+}
+
+/* Mobile Navbar Layout */
+.mobile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Mobile Appointment Button */
+.mobile-appointment-btn {
+    display: none;
+    padding: 15px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* Desktop Only */
+.desktop-only {
+    display: flex;
+}
+
+/* Responsive Rules */
+@media (max-width: 991px) {
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-appointment-btn {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .navbar-toggler {
+        padding: 4px 8px;
+        border-color: #fff;
+    }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+    .navbar-collapse {
+        background: #fff;
+        padding: 15px;
+    }
+}
+
+
+</style>
+    <!-- Header End -->
+
+    <!-- Page Header Start -->
+    <div class="page-header bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                            {{ treatment.title }}
+                        </h1>
+
+
+
+                        <nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'index' %}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'treatments' %}">Treatments</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {{ treatment.title }}
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Page Service Single Start -->
+    <div class="page-service-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Page Single Sidebar Start -->
+                    <div class="page-single-sidebar">
+                        <!-- Page Single Category List Start -->
+                        <div class="page-single-category-list wow fadeInUp">
+                            <h3>Our Treatments</h3>
+                            <ul>
+                                {% for item in other_treatments %}
+                                <li>
+                                    <a href="{% url 'treatment_details' item.slug %}">
+                                        {{ item.title }}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- Page Single Category List End -->
+
+                        <!-- Sidebar CTA Box Start -->
+                        <div class="sidebar-cta-box wow fadeInUp" data-wow-delay="0.25s">
+                            <!-- Sidebar CTA Image Start -->
+                            <div class="sidebar-cta-image">
+                                <figure>
+                                    <img src="{% static 'images/service-image-3.jpg' %}" alt="">
+                                </figure>
+                            </div>
+                            <!-- Sidebar CTA Image End -->
+
+                            <!-- Sidebar CTA Item Start -->
+                            <div class="sidebar-cta-item">
+                                <!-- Icon Box Start -->
+                                <div class="icon-box">
+                                    <img src="{% static 'images/icon-open-hour.svg' %}" alt="">
+                                </div>
+                                <!-- Icon Box End -->
+
+                                <!-- Sidebar Cta Content Start -->
+                                <div class="sidebar-cta-content">
+                                    <h3>Opening Hours:</h3>
+                                    <p>Mon - Sat : 10.00 AM - 6.00PM</p>
+                                    <p>Sunday : Closed</p>
+                                </div>
+                                <!-- Sidebar Cta Content End -->
+                            </div>
+                            <!-- Sidebar CTA Item End -->
+                        </div>
+                        <!-- Sidebar CTA Box End -->
+                    </div>
+                    <!-- Page Single Sidebar End -->
+                </div>
+
+                <div class="col-lg-8">
+                    <!-- Service Single Content Start -->
+                    <div class="service-single-content">
+                        <!-- Page Single image Start -->
+                        <div class="page-single-image">
+                            <figure class="image-anime reveal">
+                                <img src="{{ treatment.image.url }}" alt="{{ treatment.title }}">
+                            </figure>
+                        </div>
+                        <!-- Page Single image End -->
+
+                        <!-- Service Entry Start -->
+                        <div class="service-entry">
+                            <p class="wow fadeInUp">
+                                {{ treatment.description|safe }}
+                            </p>
+
+                            <!-- Service Expert Box Start -->
+                            <div class="service-enhance-box">
+
+
+
+                                <!-- Service Expert Item List End -->
+
+                                <!-- Service Entry Image Video Start -->
+                                <style>
+                                    .intro-video-box {
+                                        border-radius: 20px;
+                                        /* adjust radius */
+                                        overflow: hidden;
+                                        /* IMPORTANT */
+                                    }
+
+                                    .rounded-video {
+                                        display: block;
+                                        width: 100%;
+                                        height: auto;
+                                    }
+                                </style>
+                                <div class="servie-entry-video-image intro-video-box">
+                                    <video class="w-100 rounded-video" autoplay muted loop playsinline>
+
+                                        <source src="{% static 'videos/video1.mp4' %}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+
+                                <!-- Service Entry Image Video End -->
+
+                                <p class="wow fadeInUp">
+                                    Enhance your intimate health and overall well-being with our safe and effective
+                                    sexual wellness treatments. Our medically guided solutions help address concerns
+                                    such as reduced desire, performance challenges, and intimacy-related discomfort,
+                                    supporting natural balance and improved confidence. Our experienced specialists
+                                    ensure personalized care with discreet, comfortable, and results-focused approaches
+                                    tailored to your individual needs.
+                                </p>
+                            </div>
+                            <!-- Service Expert Box End -->
+
+                            <!-- Service Archive Box Start -->
+                            <div class="service-achieve-box">
+                                <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Achieve balanced sexual wellness with experts</h2>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                    Our advanced sexual wellness treatments are designed to improve intimate health with
+                                    precision and care. By addressing underlying physical and hormonal factors, we help
+                                    you restore confidence, comfort, and satisfaction without surgical intervention. Our
+                                    experienced specialists use proven, medically approved techniques to deliver safe,
+                                    natural, and long-lasting results tailored to your personal wellness goals.
+                                </p>
+
+                                <!-- Service Archive List Start -->
+                                <div class="service-achieve-list">
+
+                                    <!-- Service Achieve Item Start -->
+                                    <div class="how-work-step-item wow fadeInUp" data-wow-delay="0.4s">
+                                        <div class="icon-box">
+                                            <img src="{% static 'images/icon-how-work-step-1.svg' %}" alt="">
+                                        </div>
+                                        <div class="how-work-step-content">
+                                            <h3>Confidential consultation</h3>
+                                            <p>One-on-one, private consultations designed to understand your concerns in
+                                                a respectful and supportive environment.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Achieve Step Item End -->
+
+                                    <!-- Service Achieve Item Start -->
+                                    <div class="how-work-step-item wow fadeInUp" data-wow-delay="0.6s">
+                                        <div class="icon-box">
+                                            <img src="{% static 'images/icon-how-work-step-2.svg' %}" alt="">
+                                        </div>
+                                        <div class="how-work-step-content">
+                                            <h3>Personalized medical care</h3>
+                                            <p>Individually tailored, medically approved treatments focused on restoring
+                                                balance, comfort, and sexual health.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Achieve Step Item End -->
+
+                                    <!-- Service Achieve Item Start -->
+                                    <div class="how-work-step-item wow fadeInUp" data-wow-delay="0.8s">
+                                        <div class="icon-box">
+                                            <img src="{% static 'images/icon-how-work-step-3.svg' %}" alt="">
+                                        </div>
+                                        <div class="how-work-step-content">
+                                            <h3>Lasting wellness outcomes</h3>
+                                            <p>Improved confidence, intimacy, and overall quality of life through safe
+                                                and effective wellness solutions.</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Achieve Step Item End -->
+
+                                </div>
+                                <!-- Service Archive List End -->
+
+                            </div>
+                            <!-- Service Archive List End -->
+                        </div>
+                        <!-- Service Archive Box End -->
+                    </div>
+                    <!-- Service Entry End -->
+
+                    <!-- Page Single FAQs start -->
+                    <div class="page-single-faqs">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Got questions? we've got answers!</h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- FAQ Accordion Start -->
+                        <div class="faq-accordion" id="accordion">
+
+                            {% for faq in treatment.faqs.all %}
+                            <div class="accordion-item wow fadeInUp">
+                                <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                                    <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse{{ forloop.counter }}">
+                                        {{ forloop.counter }}. {{ faq.question }}
+                                    </button>
+                                </h2>
+
+                                <div id="collapse{{ forloop.counter }}"
+                                    class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>{{ faq.answer }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+                    <!-- FAQ Accordion End -->
+                </div>
+                <!-- Page Single FAQs End -->
+            </div>
+            <!-- Service Single Content End -->
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- Page Service Single End -->
+
+    <!-- Footer Main Start -->
+    <footer class="main-footer bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Footer Header Start -->
+                    <div class="footer-header">
+
+                        <!-- Footer Newsletter Form End -->
+                    </div>
+                    <!-- Footer Header End -->
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <!-- About Footer start -->
+                    <div class="about-footer">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="{% static 'images/logo-w.png' %}" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- About Footer Content Start -->
+                        <div class="about-footer-content">
+                            <p>
+                                Delivering confidential, ethical, and personalized Ayurvedic care for sexual health and
+                                mental well-being.
+                            </p>
+                        </div>
+                        <!-- About Footer Content End -->
+
+                        <!-- Footer Social Link Start -->
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Social Link End -->
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="footer-links-box">
+                        <!-- Footer Links Start -->
+                        <div class="footer-links quick-links">
+                            <h3>quick link</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'about' %}">About us</a></li>
+                                <li><a href="services.html">services</a></li>
+                                <li><a href="{% url 'contact' %}">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+
+                        <!-- Footer Links Start -->
+                        <div class="footer-links">
+                            <h3>Open Hours:</h3>
+                            <ul>
+                                <li>Mon-Sat: 10:00 to 07:00</li>
+                                <li>Sunday-Closed</li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+                    </div>
+
+                    <!-- Footer Contact Box Start -->
+                    <div class="footer-contact-box">
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Contact:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <a href="tel:8592956000">+91 8592 956 000</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>E-mail:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <a href="mailto:sperrakottakkal@gmail.com">sperrakottakkal@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Address:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    Sperra Advanced Ayurveda,<br> Chinakkal, Nayadippara Road,<br>
+                                    Kottakkal, Malappuram,<br> Kerala – 676510
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Contact Box End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Section Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text">
+                            <p>Copyright © 2025 All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+
+
+                        <!-- Footer Privacy Policy End -->
+                    </div>
+                    <!-- Footer Copyright Section End -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Main End -->
+    <!-- jQuery Library -->
+    {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'js/parallaxie.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+    <script src="{% static 'js/magiccursor.js' %}"></script>
+    <script src="{% static 'js/SplitText.js' %}"></script>
+    <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'js/jquery.mb.YTPlayer.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/function.js' %}"></script>
+{% endblock %}

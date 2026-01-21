@@ -1,0 +1,689 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Appointment | Sperra Advanced Ayurveda{% endblock %}
+
+{% block css %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Awaiken">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon-32x32.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <style>
+        .navbar-brand img { max-height: 35px; width: auto; }
+        .mobile-navbar { display: flex; align-items: center; justify-content: space-between; }
+        .mobile-appointment-btn { display: none; padding: 15px 14px; font-size: 13px; white-space: nowrap; }
+        .desktop-only { display: flex; }
+        @media (max-width: 991px) {
+            .desktop-only { display: none; }
+            .mobile-appointment-btn { display: inline-block; margin-left: auto; margin-right: 10px; }
+            .navbar-toggler { padding: 4px 8px; border-color: #fff; }
+            .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
+            .navbar-collapse { background: #fff; padding: 15px; }
+        }
+
+        /* Language Switcher Styling */
+        .language-selector { position: relative; display: flex; align-items: center; justify-content: center; margin-left: 20px; width: 30px; height: 30px; cursor: pointer; z-index: 100; }
+        .lang-icon i { color: #16243d; font-size: 20px; transition: color 0.3s ease; }
+        .language-selector:hover .lang-icon i { color: #662D91; }
+        #google_translate_element { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; overflow: hidden; z-index: 10; }
+        .goog-te-gadget-simple { width: 100% !important; height: 100% !important; padding: 0 !important; margin: 0 !important; border: none !important; display: block !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget { color: transparent !important; }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-icon"><img src="{% static 'images/preloader.png' %}" alt=""></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <header class="main-header">
+    <div class="header-sticky bg-section">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid mobile-navbar">
+
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'images/logo-p.png' %}" alt="Logo">
+                </a>
+
+                <!-- Mobile Appointment Button -->
+                <a href="{% url 'appointment' %}" class="btn-default mobile-appointment-btn">
+                    Book Now
+                </a>
+
+                <!-- Toggle Button -->
+                <button class="navbar-toggler navbar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="collapse navbar-collapse main-menu">
+                    <div class="nav-menu-wrapper">
+                        <ul class="navbar-nav mr-auto" id="menu">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'treatments' %}">Treatments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'our_doctors' %}">Our Doctors</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                        
+                            
+                        </ul>
+                    </div>
+
+                    <!-- Desktop Right Buttons -->
+                    <div class="header-contact-btn desktop-only">
+                        <a href="tel:8592956000" class="header-contact-now">
+                            <i class="fa-solid fa-phone"></i> +91 8592 956 000
+                        </a>
+                        <a href="{% url 'appointment' %}" class="btn-default">
+                            Make an Appointment
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="responsive-menu"></div>
+    </div>
+</header>
+<style>
+    /* Logo size */
+.navbar-brand img {
+    max-height: 35px;
+    width: auto;
+}
+
+/* Mobile Navbar Layout */
+.mobile-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Mobile Appointment Button */
+.mobile-appointment-btn {
+    display: none;
+    padding: 15px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+/* Desktop Only */
+.desktop-only {
+    display: flex;
+}
+
+/* Responsive Rules */
+@media (max-width: 991px) {
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-appointment-btn {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: 10px;
+    }
+
+    .navbar-toggler {
+        padding: 4px 8px;
+        border-color: #fff;
+    }
+    /* Change navbar toggler icon to white */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+    .navbar-collapse {
+        background: #fff;
+        padding: 15px;
+    }
+}
+
+
+</style>
+    <!-- Header End -->
+
+    <!-- Page Header Start -->
+    <div class="page-header bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Page Header Box Start -->
+                    <div class="page-header-box">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Appointment</h1>
+                        <!-- <nav class="wow fadeInUp">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Appointment</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                    <!-- Page Header Box End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- page Book Appointment Start -->
+    <div class="page-book-appointment">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- Our Appointment Content Start -->
+                    <div class="our-appointment-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <!-- <h3 class="wow fadeInUp">appointment</h3> -->
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Make an appointment</h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- Appointment Content Body Start -->
+                        <div class="appointment-content-body">
+                            <!-- Appointment Item Start -->
+                            <div class="appointment-item wow fadeInUp" data-wow-delay="0.2s">
+                                <!-- <div class="icon-box">
+                                    <img src="{% static 'images/icon-appointment-item-1.svg' %}" alt="">
+                                </div> -->
+                                <div class="appointment-item-content">
+                                    <h3>Customer Services</h3>
+                                    <p>
+                                        <a href="tel:8592956000">+91 8592 956 000</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Appointment Item End -->
+
+                            <!-- Appointment Item Start -->
+                            <div class="appointment-item wow fadeInUp" data-wow-delay="0.4s">
+                                <!-- <div class="icon-box">
+                                    <img src="{% static 'images/icon-appointment-item-2.svg' %}" alt="">
+                                </div> -->
+                                <div class="appointment-item-content">
+                                    <h3>Opening Hours</h3>
+                                    <p>Mon - Sat( 09:00 - 21:00 )</p>
+                                    <p>Sunday( Closed )</p>
+                                </div>
+                            </div>
+                            <!-- Appointment Item End -->
+                        </div>
+                        <!-- Appointment Content Body End -->
+                    </div>
+                    <!-- Our Appointment Content End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Appointment Form Start -->
+                    <div class="appointment-form">
+
+
+                        <div class="form-toast-container" id="formToastContainer"></div>
+                        <style>
+                            /* Toast container inside form */
+                            .form-toast-container {
+                                position: absolute;
+                                top: 85px;
+                                right: 15px;
+                                z-index: 50;
+                            }
+
+                            /* Toast box */
+                            .form-toast {
+                                min-width: 260px;
+                                max-width: 320px;
+                                padding: 14px 16px;
+                                border-radius: 6px;
+                                font-size: 14px;
+                                color: #fff;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                                animation: toastSlide 0.35s ease forwards;
+                                margin-bottom: 10px;
+                            }
+
+                            /* Success & Error */
+                            .form-toast.success {
+                                background: #B56BE3;
+                            }
+
+                            .form-toast.error {
+                                background: #dc3545;
+                            }
+
+                            /* Close button */
+                            .form-toast .close-toast {
+                                cursor: pointer;
+                                font-size: 18px;
+                                margin-left: 12px;
+                                line-height: 1;
+                            }
+
+                            /* Animation */
+                            @keyframes toastSlide {
+                                from {
+                                    opacity: 0;
+                                    transform: translateY(-10px);
+                                }
+
+                                to {
+                                    opacity: 1;
+                                    transform: translateY(0);
+                                }
+                            }
+
+                            /* Mobile */
+                            @media (max-width: 768px) {
+                                .form-toast-container {
+                                    right: 50%;
+                                    transform: translateX(50%);
+                                    top: 50px;
+                                }
+                            }
+                        </style>
+                        <script>
+                            function showFormToast(message, type = "success") {
+                                const container = document.getElementById("formToastContainer");
+                                if (!container) return;
+
+                                const toast = document.createElement("div");
+                                toast.className = `form-toast ${type}`;
+                                toast.innerHTML = `
+        <span>${message}</span>
+        <span class="close-toast">&times;</span>
+    `;
+
+                                container.appendChild(toast);
+
+                                // Close manually
+                                toast.querySelector(".close-toast").onclick = () => toast.remove();
+
+                                // Auto close
+                                setTimeout(() => {
+                                    toast.remove();
+                                }, 4000);
+                            }
+                        </script>
+                        {% if messages %}
+                        <script>
+                            {% for message in messages %}
+                            showFormToast(
+                                "{{ message|escapejs }}",
+                                "{{ message.tags }}"
+                            );
+                            {% endfor %}
+                        </script>
+                        {% endif %}
+
+                        <form method="POST" action="{% url 'appointment' %}" class="wow fadeInUp">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="first_name" class="form-control" placeholder="First Name"
+                                        required>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="last_name" class="form-control" placeholder="Last Name"
+                                        required>
+                                </div>
+
+                               
+
+                                <div class="form-group col-md-12 mb-4">
+                                    <input type="text" name="phone" class="form-control" placeholder="Phone Number"
+                                        required>
+                                </div>
+
+                                <!-- TREATMENT DROPDOWN -->
+                                <div class="form-group col-md-6 mb-4">
+                                    <select name="treatment" class="form-control form-select" required>
+                                        <option value="" disabled selected>Choose Treatment</option>
+                                        {% for treatment in treatments %}
+                                        <option value="{{ treatment.id }}">
+                                            {{ treatment.title }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-5">
+                                    <input type="date" name="appointment_date" class="form-control" required>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="contact-form-btn">
+                                        <button type="submit" class="btn-default">
+                                            Book an Appointment
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- page Book Appointment End -->
+    <!-- Our Faqs Section Start -->
+    <div class="our-faqs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <!-- Our Faqs Images Start -->
+                    <div class="our-faqs-images">
+                        <!-- Faqs Image 1 Start -->
+                        <div class="faqs-img-1">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/faq-img-1.jpg' %}" alt="Sperra Sexual Wellness">
+                            </figure>
+                        </div>
+                        <!-- Faqs Image 1 End -->
+
+                        <!-- Faqs Image 2 Start -->
+                        <div class="faqs-img-2">
+                            <figure class="image-anime reveal">
+                                <img src="{% static 'images/faq-img-2.jpg' %}" alt="Sperra Wellness">
+                            </figure>
+                        </div>
+                        <!-- Faqs Image 2 End -->
+
+
+                        <!-- Faqs Circle End -->
+                    </div>
+                    <!-- Our Faqs Images End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Our Faqs Content Start -->
+                    <div class="our-faqs-content">
+                        <!-- Section Title Start -->
+                        <div class="section-title">
+                            <h3 class="wow fadeInUp">frequently asked questions</h3>
+                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">Got questions? We've got answers!</h2>
+                        </div>
+                        <!-- Section Title End -->
+
+                        <!-- FAQ Accordion Start -->
+                        <div class="faq-accordion" id="accordion">
+                            <!-- FAQ Item 1 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.2s">
+                                <h2 class="accordion-header" id="heading1">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                        1. What services does Sperra provide?
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Sperra offers comprehensive sexual wellness solutions for men and women,
+                                            including Ayurvedic therapies, lifestyle guidance, herbal support, and
+                                            personalized treatment plans to improve intimacy, confidence, and overall
+                                            well-being.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 2 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.4s">
+                                <h2 class="accordion-header" id="heading2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                        2. Are your treatments safe and confidential?
+                                    </button>
+                                </h2>
+                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Yes. All Sperra treatments are medically approved, non-invasive, and
+                                            conducted in a completely confidential, judgment-free environment to ensure
+                                            your comfort and privacy.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 3 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.6s">
+                                <h2 class="accordion-header" id="heading3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        3. How long does it take to see results?
+                                    </button>
+                                </h2>
+                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Results vary depending on the treatment and individual needs. Many clients
+                                            notice improvements within a few sessions, while long-term wellness and
+                                            vitality are achieved through consistent lifestyle practices and
+                                            personalized plans.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ Item 4 -->
+                            <div class="accordion-item wow fadeInUp" data-wow-delay="0.8s">
+                                <h2 class="accordion-header" id="heading4">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        4. Who can benefit from Sperra’s sexual wellness treatments?
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                                    data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Sperra’s treatments are suitable for men and women experiencing challenges
+                                            such as reduced desire, intimacy concerns, hormonal imbalance, or
+                                            stress-related sexual health issues. Programs are personalized to each
+                                            individual’s needs for optimal results.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FAQ Accordion End -->
+                    </div>
+                    <!-- Our Faqs Content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Faqs Section End -->
+
+
+    <!-- Footer Main Start -->
+    <footer class="main-footer bg-section dark-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Footer Header Start -->
+                    <div class="footer-header">
+
+                        <!-- Footer Newsletter Form End -->
+                    </div>
+                    <!-- Footer Header End -->
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <!-- About Footer start -->
+                    <div class="about-footer">
+                        <!-- Footer Logo Start -->
+                        <div class="footer-logo">
+                            <img src="{% static 'images/logo-w.png' %}" alt="">
+                        </div>
+                        <!-- Footer Logo End -->
+
+                        <!-- About Footer Content Start -->
+                        <div class="about-footer-content">
+                            <p>
+                                Delivering confidential, ethical, and personalized Ayurvedic care for sexual health and
+                                mental well-being.
+                            </p>
+                        </div>
+                        <!-- About Footer Content End -->
+
+                        <!-- Footer Social Link Start -->
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Social Link End -->
+                    </div>
+                    <!-- About Footer End -->
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="footer-links-box">
+                        <!-- Footer Links Start -->
+                        <div class="footer-links quick-links">
+                            <h3>quick link</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'about' %}">About us</a></li>
+                                <li><a href="services.html">services</a></li>
+                                <li><a href="{% url 'contact' %}">Contact us</a></li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+
+                        <!-- Footer Links Start -->
+                        <div class="footer-links">
+                            <h3>Open Hours:</h3>
+                            <ul>
+                                <li>Mon-Sat: 10:00 to 07:00</li>
+                                <li>Sunday-Closed</li>
+                            </ul>
+                        </div>
+                        <!-- Footer Links End -->
+                    </div>
+
+                    <!-- Footer Contact Box Start -->
+                    <div class="footer-contact-box">
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Contact:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <a href="tel:8592956000">+91 8592 956 000</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>E-mail:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <a href="mailto:sperrakottakkal@gmail.com">sperrakottakkal@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-links footer-contact-item">
+                            <h3>Address:</h3>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    Sperra Advanced Ayurveda,<br> Chinakkal, Nayadippara Road,<br>
+                                    Kottakkal, Malappuram,<br> Kerala – 676510
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Contact Box End -->
+                </div>
+
+                <div class="col-lg-12">
+                    <!-- Footer Copyright Section Start -->
+                    <div class="footer-copyright">
+                        <!-- Footer Copyright Text Start -->
+                        <div class="footer-copyright-text">
+                            <p>Copyright © 2025 All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright Text End -->
+
+
+                        <!-- Footer Privacy Policy End -->
+                    </div>
+                    <!-- Footer Copyright Section End -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Main End -->
+    <!-- jQuery Library -->
+    {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/validator.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'js/parallaxie.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+    <script src="{% static 'js/magiccursor.js' %}"></script>
+    <script src="{% static 'js/SplitText.js' %}"></script>
+    <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+    <script src="{% static 'js/jquery.mb.YTPlayer.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/function.js' %}"></script>
+{% endblock %}
